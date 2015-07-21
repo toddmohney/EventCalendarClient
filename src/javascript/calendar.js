@@ -48,25 +48,22 @@ var Calendar = React.createClass({
   },
 
   render: function() {
-    var child1 = React.createElement('li', null, 'First Text Content');
-    var child2 = React.createElement('li', null, 'Second Text Content');
     var events = [];
 
     for(var i=0; i < this.state.events.length; i++) {
       event = this.state.events[i];
       event.key = i;
-      events.push(React.createElement('li', { className: 'calendar-item' }, React.createElement(Event, event)));
+      eventElement = React.createElement(Event, event)
+      eventListItem = React.createElement('li', { className: 'calendar-item' }, eventElement)
+      events.push(eventListItem);
     }
 
-    var root = React.DOM.ul({ className: 'calendar-items' }, events);
-
-    return root;
+    return React.DOM.ul({ className: 'calendar-items' }, events);
   }
 });
 
 React.render(
   <Calendar source="http://localhost:3000/events" />,
-  // mountNode
   document.getElementById('calendar')
 );
 
